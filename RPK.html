@@ -1,0 +1,121 @@
+<html?
+<head>
+<title> RPK BITCHES! </title> 
+    <meta charset= "UTF-8"/>
+</head>
+<body>
+    <script>
+// prompt user then convert prompt to corresponding number to feed to the game.
+
+let fate = prompt("Choose your fate!") 
+;
+let player = fate.toLowerCase();
+console.log(player);
+player = player.slice(0,1); // take first letter only 
+console.log(player);
+let pA = 0; //no longer needed
+if (player.localeCompare("r") == 0 ) // change letter to numbers 
+    {
+    player = 1; 
+    player = parseInt(player);
+    }
+    else if (player.localeCompare("p") == 0) 
+    {
+     player = 2; 
+     player = parseInt(player);
+    }
+    else if (player.localeCompare("s") == 0) 
+    {
+      player = 3; 
+      player = parseInt(player);
+    }
+//problem in above code not doing its job
+    console.log(player);
+    console.log(pA);
+
+function playRound(playerSelection, computerSelection) {
+  // your code here!
+
+  let results = "";
+  // Answer Loops comparisson below need to convert to numbers
+  if (playerSelection === "rock")
+  {
+        if (computerSelecton == "rock")
+        { 
+          return results = "tie"; 
+          console.log(results);
+        }
+        else if (computerSelection == "paper")
+        { 
+          return results = "player loses!";
+        }
+        else if (computerSelection == "scissors")
+        {
+          return results = "player wins!";
+        }
+  }
+  else if (playerSelection == "scissors")
+  {        if (computerSelecton == "rock")
+        { return results = "Player Loses!"; }
+        else if (computerSelection == "paper")
+        { return results = "Player wins";
+        }
+        else if (computerSelection == "scissors")
+        {return results = "Tie!";
+        }
+
+  }
+  else if (playerSelection == "paper")
+  {
+    if (computerSelecton == "rock")
+        { return results = "Player Wins!"; 
+        }
+        else if (computerSelection == "paper")
+        { return results = "Tie!";
+        }
+        else if (computerSelection == "scissors")
+        {return results = "Player loses!";
+        }
+  }
+
+}
+//Computers answer
+function computerPlay() 
+{
+   let compAnswer = 0; 
+   console.log(compAnswer);
+    let compChoice = Math.floor(Math.random() * 3);
+    console.log(compChoice);
+    if (compChoice <= 1)
+    {
+     let compAnswer = 1; 
+     console.log(compAnswer);
+     return compAnswer; 
+    }
+    else if (compChoice = 2)
+    {
+     let compAnswer = 2; 
+     console.log(compAnswer);
+     return compAnswer; 
+    }
+    else if (compChoice = 3)
+    {
+      let compAnswer = 3; 
+      console.log(compAnswer);
+      return compAnswer; 
+   }
+  return compAnswer; 
+  console.log(compAnswer);
+}
+
+const playerSelection = player;
+console.log(playerSelection);
+const computerSelection = computerPlay();
+// error below now due to compare not in nubers yet
+console.log(playRound(playerSelection, computerSelection));
+
+    </script>
+</body>
+</html>
+
+
