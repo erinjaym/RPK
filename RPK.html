@@ -6,81 +6,23 @@
 <body>
     <script>
 // prompt user then convert prompt to corresponding number to feed to the game.
+game();
+function game (){
+let roundCount = 1; 
+let round = "Round " + roundCount + " GO!"; 
+let playerCount = 0;
+let computerCount = 0;
 
-let fate = prompt("Choose your fate!") 
-;
-let player = fate.toLowerCase();
-console.log(player);
-player = player.slice(0,1); // take first letter only 
-console.log(player);
-let pA = 0; //no longer needed
-if (player.localeCompare("r") == 0 ) // change letter to numbers 
-    {
-    player = 1; 
-    player = parseInt(player);
-    }
-    else if (player.localeCompare("p") == 0) 
-    {
-     player = 2; 
-     player = parseInt(player);
-    }
-    else if (player.localeCompare("s") == 0) 
-    {
-      player = 3; 
-      player = parseInt(player);
-    }
-//problem in above code not doing its job
-    console.log(player);
-    console.log(pA);
+alert("LET THE GAMES BEGIN!");
 
-function playRound(playerSelection, computerSelection) {
-  // your code here!
 
-  let results = "";
-  // Answer Loops comparisson below need to convert to numbers
-  if (playerSelection === "rock")
-  {
-        if (computerSelecton == "rock")
-        { 
-          return results = "tie"; 
-          console.log(results);
-        }
-        else if (computerSelection == "paper")
-        { 
-          return results = "player loses!";
-        }
-        else if (computerSelection == "scissors")
-        {
-          return results = "player wins!";
-        }
-  }
-  else if (playerSelection == "scissors")
-  {        if (computerSelecton == "rock")
-        { return results = "Player Loses!"; }
-        else if (computerSelection == "paper")
-        { return results = "Player wins";
-        }
-        else if (computerSelection == "scissors")
-        {return results = "Tie!";
-        }
 
-  }
-  else if (playerSelection == "paper")
-  {
-    if (computerSelecton == "rock")
-        { return results = "Player Wins!"; 
-        }
-        else if (computerSelection == "paper")
-        { return results = "Tie!";
-        }
-        else if (computerSelection == "scissors")
-        {return results = "Player loses!";
-        }
-  }
+for (let k = 0; k <=4; k++)
+{
 
-}
-//Computers answer
-function computerPlay() 
+  console.log(round); // round announcement 
+
+function computerPlay() //Computers choice input
 {
    let compAnswer = 0; 
    console.log(compAnswer);
@@ -108,11 +50,100 @@ function computerPlay()
   console.log(compAnswer);
 }
 
-const playerSelection = player;
-console.log(playerSelection);
-const computerSelection = computerPlay();
-// error below now due to compare not in nubers yet
-console.log(playRound(playerSelection, computerSelection));
+const computerSelection = computerPlay(); //set computer choice
+
+
+
+let fate = prompt("Choose your fate!") ; // Players choice input
+let player = fate.toLowerCase();
+player = player.slice(0,1); // take first letter only 
+
+if (player.localeCompare("r") == 0 ) // change letter to numbers  R- 1 P-2 S-3
+    {
+    player = 1; 
+    player = parseInt(player);
+    }
+    else if (player.localeCompare("p") == 0) 
+    {
+     player = 2; 
+     player = parseInt(player);
+    }
+    else if (player.localeCompare("s") == 0) 
+    {
+      player = 3; 
+      player = parseInt(player);
+    }
+    const playerSelection = player; // set player choice
+
+ 
+console.log(playRound(playerSelection, computerSelection)); // run the game 
+function playRound(playerSelection, computerSelection) 
+{
+  roundCount += 1; //keep track of rounds
+  // your code here!
+  console.log(computerSelection);
+  console.log(playerSelection);
+  
+  // Answer Loops comparisson below need to convert to numbers  R- 1 P-2 S-3
+  if (playerSelection === computerSelection)
+  {
+    return "Your fate is TIED!";
+  }
+  else if (playerSelection == 3 && computerSelection == 1) // Scissors
+    {       
+     computerCount += 1 ; 
+     return "Player Loses!";
+    }
+  else if (playerSelection == 3 && computerSelection == 2)
+    {       
+      playerCount ++; 
+      return "Player wins MO diggity!";
+    }
+
+    else if (playerSelection == 2 && computerSelection == 1) // Paper
+   { 
+     playerCount ++; 
+     return "Player Wins!"; 
+   }
+   else if (playerSelection == 2 && computerSelection == 3)
+         {
+          computerCount ++; 
+            return "Player loses!";
+         }
+  
+
+  else if (playerSelection == 1 && computerSelection == 2) // Rock
+        { 
+          computerCount ++; 
+          return "Player Loses!"; 
+        }
+  else if (playerSelection == 1 && computerSelection == 3)
+        { 
+          playerCount ++; 
+          return "Player wins";
+        }
+}
+
+function tally (playerScore,computerScore) // calculate winner
+{
+  if (playerScore < computerScore){
+    return "The computer";
+  }
+  else if (computerScore == playerScore)
+  {
+    return "Nobody";
+  }
+  else 
+  {
+    return "The Player";
+  }
+} // end tally
+
+} // end loop
+console.log(tally(playerCount, computerCount) + " wins! " + "Player has " + playerCount + " wins! " + " Computer has " + computerCount + " wins!"); //print results
+} // end game
+
+
 
     </script>
 </body>
