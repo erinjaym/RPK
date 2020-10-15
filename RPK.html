@@ -1,5 +1,5 @@
 <html?
-<head>
+<head>RPK for the masses 
 <title> RPK BITCHES! </title> 
     <meta charset= "UTF-8"/>
 </head>
@@ -7,140 +7,136 @@
     <script>
 // prompt user then convert prompt to corresponding number to feed to the game.
 game();
-function game (){
-let roundCount = 1; 
-let round = "Round " + roundCount + " GO!"; 
-let playerCount = 0;
-let computerCount = 0;
+  function game (){
+  let roundCount = 0; 
+  let playerCount = 0;
+  let computerCount = 0;
 
-alert("LET THE GAMES BEGIN!");
-
+  alert("LET THE GAMES BEGIN!");
 
 
-for (let k = 0; k <=4; k++)
-{
 
-  console.log(round); // round announcement 
+  for (let k = 0; k <=4; k++)
+  {
+    
+    
+    roundCount++; //keep track of rounds
+    console.log("Round " + roundCount + " Go!"); // round announcement 
+    
 
-function computerPlay() //Computers choice input
-{
-   let compAnswer = 0; 
-   console.log(compAnswer);
-    let compChoice = Math.floor(Math.random() * 3);
-    console.log(compChoice);
-    if (compChoice <= 1)
+  function computerPlay() //Computers choice input
     {
-     let compAnswer = 1; 
-     console.log(compAnswer);
-     return compAnswer; 
-    }
-    else if (compChoice = 2)
-    {
-     let compAnswer = 2; 
-     console.log(compAnswer);
-     return compAnswer; 
-    }
-    else if (compChoice = 3)
-    {
-      let compAnswer = 3; 
-      console.log(compAnswer);
-      return compAnswer; 
-   }
-  return compAnswer; 
-  console.log(compAnswer);
-}
+       let compAnswer = 0; 
+      
+        let compChoice = Math.floor(Math.random() * 3);
+        
+        if (compChoice <= 1)
+        {
+        let compAnswer = 1; 
+        
+        return compAnswer; 
+        }
+        else if (compChoice = 2)
+        {
+        let compAnswer = 2; 
+        
+        return compAnswer; 
+        }
+        else if (compChoice = 3)
+        {
+          let compAnswer = 3; 
+          
+          return compAnswer; 
+      }
+    return compAnswer; 
+  }
 
-const computerSelection = computerPlay(); //set computer choice
+  const computerSelection = computerPlay(); //set computer choice
 
 
 
-let fate = prompt("Choose your fate!") ; // Players choice input
-let player = fate.toLowerCase();
-player = player.slice(0,1); // take first letter only 
+  let fate = prompt("Round " + roundCount + "!\n\nType your fate!\nRock, Paper, or Scissors?") ; // Players choice input
+  let player = fate.toLowerCase();
+  player = player.slice(0,1); // take first letter only 
 
-if (player.localeCompare("r") == 0 ) // change letter to numbers  R- 1 P-2 S-3
-    {
-    player = 1; 
-    player = parseInt(player);
-    }
-    else if (player.localeCompare("p") == 0) 
-    {
-     player = 2; 
-     player = parseInt(player);
-    }
-    else if (player.localeCompare("s") == 0) 
-    {
-      player = 3; 
+  if (player.localeCompare("r") == 0 ) // change choices to numbers  R- 1 P-2 S-3
+      {
+      player = 1; 
       player = parseInt(player);
-    }
-    const playerSelection = player; // set player choice
+      }
+    else if (player.localeCompare("p") == 0) 
+      {
+      player = 2; 
+      player = parseInt(player);
+      }
+    else if (player.localeCompare("s") == 0) 
+      {
+       player = 3; 
+       player = parseInt(player);
+      }
+      const playerSelection = player; // set player choice
 
  
-console.log(playRound(playerSelection, computerSelection)); // run the game 
-function playRound(playerSelection, computerSelection) 
-{
-  roundCount += 1; //keep track of rounds
-  // your code here!
-  console.log(computerSelection);
-  console.log(playerSelection);
-  
-  // Answer Loops comparisson below need to convert to numbers  R- 1 P-2 S-3
-  if (playerSelection === computerSelection)
+  console.log(playRound(playerSelection, computerSelection)); // print results of each round
+  function playRound(playerSelection, computerSelection) 
   {
-    return "Your fate is TIED!";
-  }
-  else if (playerSelection == 3 && computerSelection == 1) // Scissors
-    {       
-     computerCount += 1 ; 
-     return "Player Loses!";
-    }
-  else if (playerSelection == 3 && computerSelection == 2)
-    {       
+    // Rock- 1 Paper-2 Scissors-3
+    if (playerSelection === computerSelection)
+      {
+      return "You TIED!";
+      }
+    else if (playerSelection == 3 && computerSelection == 1) // Scissors
+      {       
+      computerCount ++; 
+      return "Player Loses!";
+      }
+    else if (playerSelection == 3 && computerSelection == 2)
+      {       
       playerCount ++; 
-      return "Player wins MO diggity!";
-    }
+      return "Player wins!";
+      }
 
     else if (playerSelection == 2 && computerSelection == 1) // Paper
-   { 
-     playerCount ++; 
-     return "Player Wins!"; 
-   }
-   else if (playerSelection == 2 && computerSelection == 3)
-         {
-          computerCount ++; 
-            return "Player loses!";
-         }
-  
-
-  else if (playerSelection == 1 && computerSelection == 2) // Rock
-        { 
-          computerCount ++; 
-          return "Player Loses!"; 
+      { 
+       playerCount ++; 
+       return "Player Wins!"; 
+      }
+    else if (playerSelection == 2 && computerSelection == 3)
+        {
+        computerCount ++; 
+        return "Player loses!";
         }
-  else if (playerSelection == 1 && computerSelection == 3)
+
+    else if (playerSelection == 1 && computerSelection == 2) // Rock
         { 
-          playerCount ++; 
-          return "Player wins";
+        computerCount ++; 
+        return "Player Loses!"; 
         }
-}
+    else if (playerSelection == 1 && computerSelection == 3)
+        { 
+        playerCount ++; 
+        return "Player wins";
+        }
+  }
 
-function tally (playerScore,computerScore) // calculate winner
-{
-  if (playerScore < computerScore){
-    return "The computer";
-  }
-  else if (computerScore == playerScore)
+  function tallyScore (playerScore,computerScore)
   {
-    return "Nobody";
-  }
-  else 
-  {
-    return "The Player";
-  }
-} // end tally
+    if (playerScore < computerScore)
+      {
+      return "The computer";
+      }
+    else if (computerScore == playerScore)
+      {
+      return "Nobody";
+      }
+    else 
+      {
+     return "The Player";
+      }
+  } 
 
-} // end loop
-console.log(tally(playerCount, computerCount) + " wins! " + "Player has " + playerCount + " wins! " + " Computer has " + computerCount + " wins!"); //print results
+  } // end loop
+  console.log("Your fate has been decided: \n" + tallyScore(+ playerCount, computerCount) + " wins! \n\n" + "Player had " + playerCount + " wins! \n" + "Computer had " + computerCount + " wins!"); //print results
 } // end game
 
 
