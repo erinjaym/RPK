@@ -1,29 +1,85 @@
 <html>
+<style>
+  html {
+background-color: rgb(48, 50, 75);
+color: rgb(146, 140, 142);
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  button {
+    background-color:rgb(83, 7, 58);
+    border-radius: 5%;
+    border-color: darkmagenta;
+  }
+
+  button:hover {
+    background-color:rgb(83, 7, 7);
+  }
+
+.results {
+background-color: black;
+opacity: 0.5;
+font-color: red;
+
+}
+
+</style>
+
+
+
 <head><h1><center>RPK for the masses</center></h1> 
 <title> RPK BITCHES! </title> 
     <meta charset= "UTF-8"/>
 </head>
 <body>
-  <center>This is a rock paper scissors game played in the console. Please right click and hit inspect to view your console results.</center>
-    <script>
-// prompt user then convert prompt to corresponding number to feed to the game.
+  <center>Please choose your soldier to fight the skynet RPK insurgency!<br><br>
+
+  
+   <table> 
+     <div id= selections>
+      <button id=2 alt id="paper"><img src = "images/paper.jpg" height="300px" width="300px"></button>
+      <button id=1 alt id="rock"><img src = "images/rock.png" height="300px" width="300px"></button>
+      <button id=3 alt id="scissors"><img src = "images/scissors.png" height="300px" width="300px"></button>
+    </div>
+  </table>
+  <div id="winner" style="color: red;"><h2> </h2></div>
+    <div ><h2>Computer wins:</h2></div> <div id="compResults">0</div>
+    <div><h2>Player wins:</h2></div><div class= results; id="playerResults">0</div>
+    <div><h2>Ties:</h2><div id="tieResults">0</div>
+
+  
+  </center>
+   
+   <script>
 game();
-  function game (){
+
+  
+
+function game (){
   let roundCount = 0; 
   let playerCount = 0;
   let computerCount = 0;
+  let tieCount = 0;
 
-  alert("LET THE GAMES BEGIN!");
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+
+// and for each one we add a 'click' listener
+button.addEventListener('click', () => {
+const playerSelection = button.id;
+console.log(playerSelection);
+playRound(button.id, computerPlay());
+
+  //alert("LET THE GAMES BEGIN! Please click your warrior!");  OLD Console intro
 
 
 
-  for (let k = 0; k <=4; k++)
-  {
+  //for (let k = 0; k <=4; k++) 5 round loop 
+  //{ 5 round loop bracket
     
     
-    roundCount++; //keep track of rounds
-    console.log("Round " + roundCount + " Go!"); // round announcement 
-    
+  //  roundCount++; //keep track of rounds
+    // console.log("Round " + roundCount + " Go!"); // round announcement 
+  
 
   function computerPlay() //Computers choice input
     {
@@ -48,78 +104,61 @@ game();
           let compAnswer = 3; 
           
           return compAnswer; 
-      }
+        }
     return compAnswer; 
-  }
+   } 
 
-  const computerSelection = computerPlay(); //set computer choice
-
-
-
-  let fate = prompt("Round " + roundCount + "!\n\nType your fate!\nRock, Paper, or Scissors?") ; // Players choice input
-  let player = fate.toLowerCase();
-  player = player.slice(0,1); // take first letter only 
-
-  if (player.localeCompare("r") == 0 ) // change choices to numbers  R- 1 P-2 S-3
-      {
-      player = 1; 
-      player = parseInt(player);
-      }
-    else if (player.localeCompare("p") == 0) 
-      {
-      player = 2; 
-      player = parseInt(player);
-      }
-    else if (player.localeCompare("s") == 0) 
-      {
-       player = 3; 
-       player = parseInt(player);
-      }
-      const playerSelection = player; // set player choice
-
- 
-  console.log(playRound(playerSelection, computerSelection)); // print results of each round
+  
+ // Fixed 
   function playRound(playerSelection, computerSelection) 
   {
+    console.log(playerSelection + " " + computerSelection); //Print each round selections
     // Rock- 1 Paper-2 Scissors-3
-    if (playerSelection === computerSelection)
+    if (playerSelection == computerSelection)
       {
+      tieCount ++;
       return "You TIED!";
       }
-    else if (playerSelection == 3 && computerSelection == 1) // Scissors
+    else if (playerSelection == 3 && computerSelection == 1) // Scissors vs rock
       {       
       computerCount ++; 
       return "Player Loses!";
       }
-    else if (playerSelection == 3 && computerSelection == 2)
+    else if (playerSelection == 3 && computerSelection == 2) // scissors vs paper
       {       
       playerCount ++; 
+      console.log("Scissors beats paper");
       return "Player wins!";
       }
 
-    else if (playerSelection == 2 && computerSelection == 1) // Paper
+    else if (playerSelection == 2 && computerSelection == 1) // Paper vs rock
       { 
        playerCount ++; 
        return "Player Wins!"; 
       }
-    else if (playerSelection == 2 && computerSelection == 3)
+    else if (playerSelection == 2 && computerSelection == 3) // Paper vs scissors
         {
         computerCount ++; 
         return "Player loses!";
         }
 
-    else if (playerSelection == 1 && computerSelection == 2) // Rock
+    else if (playerSelection == 1 && computerSelection == 2) // Rock vs paper
         { 
         computerCount ++; 
         return "Player Loses!"; 
         }
-    else if (playerSelection == 1 && computerSelection == 3)
+    else if (playerSelection == 1 && computerSelection == 3) // Rock vs scissors
         { 
         playerCount ++; 
         return "Player wins";
         }
+    else 
+      { 
+      console.log("base case");
+      }
   }
 
+  // Tallies each round tally 
   function tallyScore (playerScore,computerScore)
   {
     if (playerScore < computerScore)
@@ -128,7 +167,7 @@ game();
       }
     else if (computerScore == playerScore)
       {
-      return "Nobody";
+      return "(Tie) Nobody";
       }
     else 
       {
@@ -136,9 +175,84 @@ game();
       }
   } 
 
-  } // end loop
-  console.log("Your fate has been decided: \n" + tallyScore(+ playerCount, computerCount) + " wins! \n\n" + "Player had " + playerCount + " wins! \n" + "Computer had " + computerCount + " wins!"); //print results
+// after 5 rounds call this end game tally
+
+  function finalTally (playerScore,computerScore)
+  {
+    if (playerScore < computerScore)
+      {
+      return "The computer";
+      }
+    else if (computerScore == playerScore)
+      {
+      return "(Tie) Nobody";
+      }
+    else 
+      {
+     return "The Player";
+      }
+  } 
+
+  // } // end 5 round loop
+
+
+
+document.getElementById("compResults").lastChild.textContent = computerCount;
+document.getElementById("playerResults").lastChild.textContent = playerCount;
+document.getElementById("tieResults").lastChild.textContent = tieCount;
+
+
+document.getElementById("winner").lastChild.textContent = "Your fate has been decided: \n" + tallyScore(+ playerCount, computerCount) + " wins! \n\n";
+//Note who wins ... if computer print computer if player print player if tie print tie. If five rounds end game. 
+console.log("Your fate has been decided: \n" + tallyScore(playerCount, computerCount) + " wins! \n\n" + "Player had " + playerCount + " wins! \n" + "Computer had " + computerCount + " wins!"); //print results
+
+
+
+// Reset after 5 rounds 
+if (computerCount == 5 || playerCount == 5){
+console.log(finalTally()); 
+// Need to add a if comp
+if (computerCount < playerCount) // Player wins
+
+{
+  alert ("GAME OVER! " + finalTally(playerCount, computerCount) + " Wins " + playerCount + " to " + computerCount );
+
+}
+
+else if (computerCount > playerCount)//computer wins
+
+{
+  alert ("GAME OVER! " + finalTally(playerCount, computerCount) + " Wins " + computerCount + " to " + playerCount);
+}
+
+else  //Tie game
+{
+  alert ("GAME OVER! " + finalTally(playerCount, computerCount) + " Wins.");
+
+}
+//reset game counters
+roundCount = 0; 
+playerCount = 0;
+computerCount = 0;
+//reset screen info
+document.getElementById("compResults").lastChild.textContent = computerCount;
+document.getElementById("playerResults").lastChild.textContent = playerCount;
+document.getElementById("tieResults").lastChild.textContent = tieCount;
+}
+
+else{}
+
+
+
+
+}); // end windows listener
+}); // end windows listener
+
 } // end game
+
+
+
+
 
 
 
